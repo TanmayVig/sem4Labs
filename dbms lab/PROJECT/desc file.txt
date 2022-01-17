@@ -1,0 +1,163 @@
+DB NAME project.
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_project |
++-------------------+
+| admin             |
+| cart              |
+| costumer          |
+| orders            |
+| product           |
+| seller            |
+| user              |
++-------------------+
+7 rows in set (0.00 sec)
+
+
+mysql> CREATE TABLE user(
+    -> email VARCHAR(50) PRIMARY KEY,
+    -> name VARCHAR(50) NOT NULL,
+    -> password VARCHAR(50) NOT NULL,
+    -> category VARCHAR(10) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+mysql> DESC user;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| email    | varchar(50) | NO   | PRI | NULL    |       |
+| name     | varchar(50) | NO   |     | NULL    |       |
+| password | varchar(50) | NO   |     | NULL    |       |
+| category | varchar(10) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+
+mysql> CREATE TABLE admin(
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> name VARCHAR(50) NOT NULL,
+    -> email VARCHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+mysql> DESC admin;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | NO   |     | NULL    |                |
+| email | varchar(50) | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+
+mysql> CREATE TABLE seller(
+    -> name VARCHAR(50) NOT NULL,
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> location VARCHAR(200) NOT NULL,
+    -> email VARCHAR(50) NOT NULL,
+    -> joined TIMESTAMP
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+mysql> DESC seller;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| name     | varchar(50)  | NO   |     | NULL    |                |
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| location | varchar(200) | NO   |     | NULL    |                |
+| email    | varchar(50)  | NO   |     | NULL    |                |
+| joined   | timestamp    | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+
+
+mysql> CREATE TABLE costumer(
+    -> name VARCHAR(50) NOT NULL,
+    -> email VARCHAR(50) NOT NULL,
+    -> location VARCHAR(500) NOT NULL,
+    -> joined TIMESTAMP NOT NULL,
+    -> id INT PRIMARY KEY AUTO_INCREMENT
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+mysql> DESC costumer;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| name     | varchar(50)  | NO   |     | NULL    |                |
+| email    | varchar(50)  | NO   |     | NULL    |                |
+| location | varchar(500) | NO   |     | NULL    |                |
+| joined   | timestamp    | NO   |     | NULL    |                |
+| id       | int          | NO   | PRI | NULL    | auto_increment |
++----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+
+mysql> CREATE TABLE product(
+    -> name VARCHAR(100) NOT NULL,
+    -> description VARCHAR(1000),
+    -> price DECIMAL(5,2),
+    -> seller_id INT,
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> category VARCHAR(100) NOT NULL,
+    -> FOREIGN KEY (seller_id) REFERENCES seller(id)
+    -> ON DELETE SET NULL
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+mysql> DESC product;
++-------------+---------------+------+-----+---------+----------------+
+| Field       | Type          | Null | Key | Default | Extra          |
++-------------+---------------+------+-----+---------+----------------+
+| name        | varchar(100)  | NO   |     | NULL    |                |
+| description | varchar(1000) | YES  |     | NULL    |                |
+| price       | decimal(5,2)  | YES  |     | NULL    |                |
+| seller_id   | int           | YES  | MUL | NULL    |                |
+| id          | int           | NO   | PRI | NULL    | auto_increment |
+| category    | varchar(100)  | NO   |     | NULL    |                |
++-------------+---------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+
+mysql> CREATE TABLE cart(
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> quantity INT NOT NULL,
+    -> product_id INT NULL,
+    -> costumer_id INT NULL,
+    -> FOREIGN KEY (product_id) REFERENCES product(id)
+    -> ON DELETE SET NULL,
+    -> FOREIGN KEY (costumer_id) REFERENCES costumer(id)
+    -> ON DELETE SET NULL);
+Query OK, 0 rows affected (0.06 sec)
+mysql> DESC cart;
++-------------+------+------+-----+---------+----------------+
+| Field       | Type | Null | Key | Default | Extra          |
++-------------+------+------+-----+---------+----------------+
+| id          | int  | NO   | PRI | NULL    | auto_increment |
+| quantity    | int  | NO   |     | NULL    |                |
+| product_id  | int  | YES  | MUL | NULL    |                |
+| costumer_id | int  | YES  | MUL | NULL    |                |
++-------------+------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+
+mysql> CREATE TABLE orders(
+    -> shipping_address VARCHAR(500) NOT NULL,
+    -> status VARCHAR(10) NOT NULL,
+    -> amount DECIMAL(5,2) NOT NULL,
+    -> cart_id INT,
+    -> FOREIGN KEY (cart_id) REFERENCES cart(id)
+    -> ON DELETE SET NULL
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+mysql> DESC orders;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| shipping_address | varchar(500) | NO   |     | NULL    |       |
+| status           | varchar(10)  | NO   |     | NULL    |       |
+| amount           | decimal(5,2) | NO   |     | NULL    |       |
+| cart_id          | int          | YES  | MUL | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)

@@ -1,0 +1,225 @@
+ans1
+CREATE TABLE department(
+    -> DeprID INT,
+    -> DeptName CHAR(40));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESC department;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| DeprID   | int      | YES  |     | NULL    |       |
+| DeptName | char(40) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+mysql>INSERT INTO department
+    -> VALUES
+    -> (1,'Information Technology'),
+    -> (2,'Electrical'),
+    -> (3,'Civil'),
+    -> (4,'Mechanical'),
+    -> (5,'Chemical');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM department;
++--------+------------------------+
+| DeprID | DeptName               |
++--------+------------------------+
+|      1 | Information Technology |
+|      2 | Electrical             |
+|      3 | Civil                  |
+|      4 | Mechanical             |
+|      5 | Chemical               |
++--------+------------------------+
+
+mysql> CREATE TABLE stud_member(
+    -> RollNo INT,
+    -> FName CHAR(7),
+    -> MName CHAR(15),
+    -> SName CHAR(10),
+    -> DeptID INT,
+    -> Semester INT,
+    -> ContactNo INT,
+    -> Gender CHAR);
+Query OK, 0 rows affected (0.06 sec)
+mysql> DESC stud_member;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| RollNo    | int      | YES  |     | NULL    |       |
+| FName     | char(7)  | YES  |     | NULL    |       |
+| MName     | char(15) | YES  |     | NULL    |       |
+| SName     | char(10) | YES  |     | NULL    |       |
+| DeptID    | int      | YES  |     | NULL    |       |
+| Semester  | int      | YES  |     | NULL    |       |
+| ContactNo | int      | YES  |     | NULL    |       |
+| Gender    | char(1)  | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+
+mysql> INSERT INTO stud_member
+    -> VALUES
+    -> (1,'Ankur','Samir','Kahar',1,1,272121,'M'),
+    -> (2,'Dhaval','Dhiren','Joshi',1,1,232122,'M'),
+    -> (3,'Ankita','Biren','Shah',1,1,112121,'F'),
+    -> (10,'Komal','MaheshKumar','Pandya',2,3,123123,'F'),
+    -> (13,'Amit','Jitenkumar','Mehta',3,3,453667,'M'),
+    -> (23,'Jinal','Ashish','Gandhi',2,1,323232,'M'),
+    -> (22,'Ganesh','Asha','Patel',2,3,124244,'M'),
+    -> (4,'Shweta','Mihir','Patel',3,1,646341,'F'),
+    -> (7,'Pooja','Mayaank','Desai',3,3,328656,'F'),
+    -> (8,'Komal','Krishnaraj','Bhatia',2,3,257422,'F'),
+    -> (43,'Kiran','Viraj','Shah',1,1,754124,'F');
+Query OK, 11 rows affected (0.02 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM stud_member;
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+| RollNo | FName  | MName       | SName  | DeptID | Semester | ContactNo | Gender |
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+|      1 | Ankur  | Samir       | Kahar  |      1 |        1 |    272121 | M      |
+|      2 | Dhaval | Dhiren      | Joshi  |      1 |        1 |    232122 | M      |
+|      3 | Ankita | Biren       | Shah   |      1 |        1 |    112121 | F      |
+|     10 | Komal  | MaheshKumar | Pandya |      2 |        3 |    123123 | F      |
+|     13 | Amit   | Jitenkumar  | Mehta  |      3 |        3 |    453667 | M      |
+|     23 | Jinal  | Ashish      | Gandhi |      2 |        1 |    323232 | M      |
+|     22 | Ganesh | Asha        | Patel  |      2 |        3 |    124244 | M      |
+|      4 | Shweta | Mihir       | Patel  |      3 |        1 |    646341 | F      |
+|      7 | Pooja  | Mayaank     | Desai  |      3 |        3 |    328656 | F      |
+|      8 | Komal  | Krishnaraj  | Bhatia |      2 |        3 |    257422 | F      |
+|     43 | Kiran  | Viraj       | Shah   |      1 |        1 |    754124 | F      |
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+
+1
+mysql> SELECT CONCAT(FName,' ',MName,' ',SName) AS Name, ContactNo FROM stud_member;
++--------------------------+-----------+
+| Name                     | ContactNo |
++--------------------------+-----------+
+| Ankur Samir Kahar        |    272121 |
+| Dhaval Dhiren Joshi      |    232122 |
+| Ankita Biren Shah        |    112121 |
+| Komal MaheshKumar Pandya |    123123 |
+| Amit Jitenkumar Mehta    |    453667 |
+| Jinal Ashish Gandhi      |    323232 |
+| Ganesh Asha Patel        |    124244 |
+| Shweta Mihir Patel       |    646341 |
+| Pooja Mayaank Desai      |    328656 |
+| Komal Krishnaraj Bhatia  |    257422 |
+| Kiran Viraj Shah         |    754124 |
++--------------------------+-----------+
+
+2
+mysql> SELECT CONCAT(FName,' ',MName,' ',SName) AS Name, RollNo FROM stud_member
+    -> WHERE DeptID = 1;
++---------------------+--------+
+| Name                | RollNo |
++---------------------+--------+
+| Ankur Samir Kahar   |      1 |
+| Dhaval Dhiren Joshi |      2 |
+| Ankita Biren Shah   |      3 |
+| Kiran Viraj Shah    |     43 |
++---------------------+--------+
+
+3
+mysql> SELECT DISTINCT D.DeptName
+    -> FROM department AS D, stud_member AS S
+    -> WHERE D.DeptID = S.DeptID
+    -> ORDER BY D.DeptID;
++------------------------+
+| DeptName               |
++------------------------+
+| Information Technology |
+| Electrical             |
+| Civil                  |
++------------------------+
+
+4
+mysql> SELECT DeptName
+    -> FROM department
+    -> WHERE DeptID NOT IN (SELECT DeptID FROM stud_member);
++------------+
+| DeptName   |
++------------+
+| Mechanical |
+| Chemical   |
++------------+
+2 rows in set (0.01 sec)
+
+5
+mysql> SELECT DeptName FROM department;
++------------------------+
+| DeptName               |
++------------------------+
+| Information Technology |
+| Electrical             |
+| Civil                  |
+| Mechanical             |
+| Chemical               |
++------------------------+
+5 rows in set (0.00 sec)
+
+6
+mysql> SELECT COUNT(*)
+    -> FROM stud_member
+    -> WHERE DeptID = 2;
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.01 sec)
+
+7
+mysql> SELECT * FROM stud_member
+    -> WHERE FName LIKE 'A%';
++--------+--------+------------+-------+--------+----------+-----------+--------+
+| RollNo | FName  | MName      | SName | DeptID | Semester | ContactNo | Gender |
++--------+--------+------------+-------+--------+----------+-----------+--------+
+|      1 | Ankur  | Samir      | Kahar |      1 |        1 |    272121 | M      |
+|      3 | Ankita | Biren      | Shah  |      1 |        1 |    112121 | F      |
+|     13 | Amit   | Jitenkumar | Mehta |      3 |        3 |    453667 | M      |
++--------+--------+------------+-------+--------+----------+-----------+--------+
+3 rows in set (0.01 sec)
+
+8
+mysql> SELECT * FROM stud_member
+    -> WHERE Gender = 'M';
++--------+--------+------------+--------+--------+----------+-----------+--------+
+| RollNo | FName  | MName      | SName  | DeptID | Semester | ContactNo | Gender |
++--------+--------+------------+--------+--------+----------+-----------+--------+
+|      1 | Ankur  | Samir      | Kahar  |      1 |        1 |    272121 | M      |
+|      2 | Dhaval | Dhiren     | Joshi  |      1 |        1 |    232122 | M      |
+|     13 | Amit   | Jitenkumar | Mehta  |      3 |        3 |    453667 | M      |
+|     23 | Jinal  | Ashish     | Gandhi |      2 |        1 |    323232 | M      |
+|     22 | Ganesh | Asha       | Patel  |      2 |        3 |    124244 | M      |
++--------+--------+------------+--------+--------+----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+9
+mysql> SELECT * FROM stud_member
+    -> WHERE Semester = 3;
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+| RollNo | FName  | MName       | SName  | DeptID | Semester | ContactNo | Gender |
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+|     10 | Komal  | MaheshKumar | Pandya |      2 |        3 |    123123 | F      |
+|     13 | Amit   | Jitenkumar  | Mehta  |      3 |        3 |    453667 | M      |
+|     22 | Ganesh | Asha        | Patel  |      2 |        3 |    124244 | M      |
+|      7 | Pooja  | Mayaank     | Desai  |      3 |        3 |    328656 | F      |
+|      8 | Komal  | Krishnaraj  | Bhatia |      2 |        3 |    257422 | F      |
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+10
+mysql> SELECT * FROM stud_member
+    -> WHERE Gender = 'F'
+    -> ORDER BY FName;
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+| RollNo | FName  | MName       | SName  | DeptID | Semester | ContactNo | Gender |
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+|      3 | Ankita | Biren       | Shah   |      1 |        1 |    112121 | F      |
+|     43 | Kiran  | Viraj       | Shah   |      1 |        1 |    754124 | F      |
+|     10 | Komal  | MaheshKumar | Pandya |      2 |        3 |    123123 | F      |
+|      8 | Komal  | Krishnaraj  | Bhatia |      2 |        3 |    257422 | F      |
+|      7 | Pooja  | Mayaank     | Desai  |      3 |        3 |    328656 | F      |
+|      4 | Shweta | Mihir       | Patel  |      3 |        1 |    646341 | F      |
++--------+--------+-------------+--------+--------+----------+-----------+--------+
+6 rows in set (0.01 sec)

@@ -1,0 +1,108 @@
+5.a
+mysql> DELETE FROM Salesman_Master
+    -> WHERE SalAmt = 3500;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Salesman_Master;
++------------+--------------+----------+----------+------+---------+-------------+--------+----------+----------+---------+
+| SalesmanNo | SalesmanName | Address1 | Address2 | City | PinCode | State       | SalAmt | TgttoGet | YtdSales | Remarks |
++------------+--------------+----------+----------+------+---------+-------------+--------+----------+----------+---------+
+| S00001     | Aman         | A/14     | Worli    | Pune |  400002 | Maharashtra |   3000 |      100 |       50 | Good    |
+| S00002     | Omkar        | 65       | Nariman  | Pune |  400001 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00003     | Raj          | P-7      | Bandra   | Pune |  400032 | Maharashtra |   3000 |      200 |      100 | Good    |
++------------+--------------+----------+----------+------+---------+-------------+--------+----------+----------+---------+
+5.b
+mysql> DELETE FROM Product_Master
+    -> WHERE QtyOnHand = 100;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> SELECT * FROM Product_Master;
++-----------+-------------+----------+-------+-----------+------+-----------+-----------+
+| ProductNo | ProductName | Quantity | Piece | QtyOnHand | Tax  | CostPrice | SellPrice |
++-----------+-------------+----------+-------+-----------+------+-----------+-----------+
+| P0001     | T-shirts    |     5.00 | Piece |       200 |   50 |       350 |       250 |
+| P0345     | Shirts      |     6.00 | Piece |       150 |   50 |       500 |       350 |
+| P07868    | Trousers    |     2.00 | Piece |       150 |   50 |       950 |       550 |
+| P07885    | Pull Overs  |     2.50 | Piece |       150 |   50 |       850 |       550 |
+| P07868    | Lycra Tops  |     5.00 | Piece |        70 |   30 |       300 |       175 |
+| P07868    | Skirts      |     5.00 | Piece |        75 |   30 |       450 |       300 |
++-----------+-------------+----------+-------+-----------+------+-----------+-----------+
+5.c
+mysql> DELETE FROM Client_Master
+    -> WHERE State = 'Tamil Nadu';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Client_Master;
++----------+---------------+----------+----------+-----------+---------+-------------+--------+
+| ClientNo | Name          | Address1 | Address2 | City      | PinCode | State       | BalDue |
++----------+---------------+----------+----------+-----------+---------+-------------+--------+
+| C00001   | Ivan Bayross  | Address1 | Address2 | Mumbai    |  400001 | Maharashtra |   1000 |
+| C00003   | Chhaya Bankar | Address1 | Address2 | Mumbai    |  400057 | Maharashtra |   5000 |
+| C00004   | Ashwini Joshi | Address1 | Address2 | Bangalore |  560001 | Karnataka   |      0 |
+| C00005   | Hansei Colaco | Address1 | Address2 | Bangalore |  400060 | Maharashtra |   2000 |
+| C00006   | Deepak Sharma | Address1 | Address2 | Mangalore |  560050 | Karnataka   |      0 |
++----------+---------------+----------+----------+-----------+---------+-------------+--------+
+
+6.d
+mysql> ALTER TABLE Client_Master
+    -> ADD COLUMN Telephone INT;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC Client_Master;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| ClientNo  | varchar(6)  | YES  |     | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| Address1  | varchar(30) | YES  |     | NULL    |       |
+| Address2  | varchar(30) | YES  |     | NULL    |       |
+| City      | varchar(15) | YES  |     | NULL    |       |
+| PinCode   | int         | YES  |     | NULL    |       |
+| State     | varchar(15) | YES  |     | NULL    |       |
+| BalDue    | int         | YES  |     | NULL    |       |
+| Telephone | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6.e
+mysql> ALTER TABLE Product_Master
+    -> MODIFY SellPrice DECIMAL(10,2);
+Query OK, 6 rows affected (0.08 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> DESC Product_Master;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| ProductNo   | varchar(6)    | YES  |     | NULL    |       |
+| ProductName | varchar(15)   | YES  |     | NULL    |       |
+| Quantity    | decimal(3,2)  | YES  |     | NULL    |       |
+| Piece       | char(10)      | YES  |     | NULL    |       |
+| QtyOnHand   | int           | YES  |     | NULL    |       |
+| Tax         | int           | YES  |     | NULL    |       |
+| CostPrice   | int           | YES  |     | NULL    |       |
+| SellPrice   | decimal(10,2) | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+
+7.f
+mysql> DROP TABLE Client_Master;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_lab   |
++-----------------+
+| product_master  |
+| salesman_master |
++-----------------+
+
+8.g
+mysql> RENAME TABLE Salesman_Master TO sman_mast;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++----------------+
+| Tables_in_lab  |
++----------------+
+| product_master |
+| sman_mast      |
++----------------+

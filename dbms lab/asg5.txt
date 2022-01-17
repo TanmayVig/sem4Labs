@@ -1,0 +1,205 @@
+mysql> CREATE TABLE sales(
+    -> orderID INT,
+    -> orderDate DATE,
+    -> orderPrice INT,
+    -> orderQuantity INT,
+    -> costumerName VARCHAR(10)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+mysql> INSERT INTO sales
+    -> VALUES
+    -> (1,'2005-12-22',160,2,'Smith'),
+    -> (2,'2005-08-10',190,2,'Johnson'),
+    -> (3,'2005-07-13',500,5,'Baldwin'),
+    -> (4,'2005-07-15',420,2,'Smith'),
+    -> (5,'2005-12-22',1000,4,'Wood'),
+    -> (6,'2005-10-02',820,4,'Smith'),
+    -> (7,'2005-11-03',2000,2,'Baldwin');
+Query OK, 7 rows affected (0.02 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+mysql> SELECT * FROM sales;
++---------+------------+------------+---------------+--------------+
+| orderID | orderDate  | orderPrice | orderQuantity | costumerName |
++---------+------------+------------+---------------+--------------+
+|       1 | 2005-12-22 |        160 |             2 | Smith        |
+|       2 | 2005-08-10 |        190 |             2 | Johnson      |
+|       3 | 2005-07-13 |        500 |             5 | Baldwin      |
+|       4 | 2005-07-15 |        420 |             2 | Smith        |
+|       5 | 2005-12-22 |       1000 |             4 | Wood         |
+|       6 | 2005-10-02 |        820 |             4 | Smith        |
+|       7 | 2005-11-03 |       2000 |             2 | Baldwin      |
++---------+------------+------------+---------------+--------------+
+7 rows in set (0.01 sec)
+
+
+1.
+mysql> SELECT COUNT(costumerName) FROM sales
+    -> WHERE costumerName = 'Smith';
++---------------------+
+| COUNT(costumerName) |
++---------------------+
+|                   3 |
++---------------------+
+1 row in set (0.01 sec)
+
+2.
+mysql> SELECT COUNT(DISTINCT costumerName) Unique_Costumers FROM sales;
++------------------+
+| Unique_Costumers |
++------------------+
+|                4 |
++------------------+
+1 row in set (0.00 sec)
+
+3.
+mysql> SELECT SUM(orderQuantity) Total_Items FROM sales;
++-------------+
+| Total_Items |
++-------------+
+|          21 |
++-------------+
+1 row in set (0.00 sec)
+
+4.
+mysql> SELECT AVG(orderQuantity) FROM sales;
++--------------------+
+| AVG(orderQuantity) |
++--------------------+
+|             3.0000 |
++--------------------+
+1 row in set (0.00 sec)
+
+5.
+mysql> SELECT AVG(orderQuantity) FROM sales
+    -> WHERE orderPrice > 200;
++--------------------+
+| AVG(orderQuantity) |
++--------------------+
+|             3.4000 |
++--------------------+
+1 row in set (0.00 sec)
+
+6.
+mysql> SELECT MIN(orderPrice) FROM sales;
++-----------------+
+| MIN(orderPrice) |
++-----------------+
+|             160 |
++-----------------+
+1 row in set (0.00 sec)
+
+7.
+mysql> SELECT MAX(orderPrice) FROM sales;
++-----------------+
+| MAX(orderPrice) |
++-----------------+
+|            2000 |
++-----------------+
+1 row in set (0.00 sec)
+
+8.
+mysql> SELECT DISTINCT costumerName FROM sales;
++--------------+
+| costumerName |
++--------------+
+| Smith        |
+| Johnson      |
+| Baldwin      |
+| Wood         |
++--------------+
+4 rows in set (0.00 sec)
+
+9.
+mysql> SELECT costumerName, orderDate FROM sales
+    -> WHERE month(orderDate)=12;
++--------------+------------+
+| costumerName | orderDate  |
++--------------+------------+
+| Smith        | 2005-12-22 |
+| Wood         | 2005-12-22 |
++--------------+------------+
+2 rows in set (0.01 sec)
+
+10.
+mysql> SELECT costumerName, SUM(orderPrice) FROM sales
+    -> GROUP BY costumerName;
++--------------+-----------------+
+| costumerName | SUM(orderPrice) |
++--------------+-----------------+
+| Smith        |            1400 |
+| Johnson      |             190 |
+| Baldwin      |            2500 |
+| Wood         |            1000 |
++--------------+-----------------+
+4 rows in set (0.00 sec)
+
+11.
+mysql> SELECT costumerName, SUM(orderPrice) FROM sales
+    -> GROUP BY costumerName
+    -> HAVING SUM(orderPrice) > 1200;
++--------------+-----------------+
+| costumerName | SUM(orderPrice) |
++--------------+-----------------+
+| Smith        |            1400 |
+| Baldwin      |            2500 |
++--------------+-----------------+
+2 rows in set (0.00 sec)
+
+12.
+mysql> SELECT costumerName, SUM(orderQuantity) FROM sales
+    -> GROUP BY costumerName
+    -> HAVING SUM(orderQuantity) > 5;
++--------------+--------------------+
+| costumerName | SUM(orderQuantity) |
++--------------+--------------------+
+| Smith        |                  8 |
+| Baldwin      |                  7 |
++--------------+--------------------+
+2 rows in set (0.00 sec)
+
+
+13.
+mysql> SELECT * FROM sales
+    -> WHERE orderDate>'2005/01/10'
+    -> GROUP BY costumerName
+    -> HAVING SUM(orderPrice)>1000;
++---------+------------+------------+---------------+--------------+
+| orderID | orderDate  | orderPrice | orderQuantity | costumerName |
++---------+------------+------------+---------------+--------------+
+|       1 | 2005-12-22 |        160 |             2 | Smith        |
+|       3 | 2005-07-13 |        500 |             5 | Baldwin      |
++---------+------------+------------+---------------+--------------+
+2 rows in set (0.00 sec)
+
+
+14.
+mysql> SELECT * FROM sales
+    -> ORDER BY orderPrice;
++---------+------------+------------+---------------+--------------+
+| orderID | orderDate  | orderPrice | orderQuantity | costumerName |
++---------+------------+------------+---------------+--------------+
+|       1 | 2005-12-22 |        160 |             2 | Smith        |
+|       2 | 2005-08-10 |        190 |             2 | Johnson      |
+|       4 | 2005-07-15 |        420 |             2 | Smith        |
+|       3 | 2005-07-13 |        500 |             5 | Baldwin      |
+|       6 | 2005-10-02 |        820 |             4 | Smith        |
+|       5 | 2005-12-22 |       1000 |             4 | Wood         |
+|       7 | 2005-11-03 |       2000 |             2 | Baldwin      |
++---------+------------+------------+---------------+--------------+
+7 rows in set (0.00 sec)
+
+15.
+mysql> SELECT * FROM sales
+    -> ORDER BY orderPrice DESC;
++---------+------------+------------+---------------+--------------+
+| orderID | orderDate  | orderPrice | orderQuantity | costumerName |
++---------+------------+------------+---------------+--------------+
+|       7 | 2005-11-03 |       2000 |             2 | Baldwin      |
+|       5 | 2005-12-22 |       1000 |             4 | Wood         |
+|       6 | 2005-10-02 |        820 |             4 | Smith        |
+|       3 | 2005-07-13 |        500 |             5 | Baldwin      |
+|       4 | 2005-07-15 |        420 |             2 | Smith        |
+|       2 | 2005-08-10 |        190 |             2 | Johnson      |
+|       1 | 2005-12-22 |        160 |             2 | Smith        |
++---------+------------+------------+---------------+--------------+
+7 rows in set (0.00 sec)

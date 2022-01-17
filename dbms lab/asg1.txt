@@ -1,0 +1,189 @@
+1.a
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ClientNo | varchar(6)  | YES  |     | NULL    |       |
+| Name     | varchar(20) | YES  |     | NULL    |       |
+| Address1 | varchar(30) | YES  |     | NULL    |       |
+| Address2 | varchar(30) | YES  |     | NULL    |       |
+| City     | varchar(15) | YES  |     | NULL    |       |
+| PinCode  | int         | YES  |     | NULL    |       |
+| Sate     | varchar(15) | YES  |     | NULL    |       |
+| BalDue   | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+1.b
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| ProductNo     | varchar(6)  | YES  |     | NULL    |       |
+| Description   | varchar(15) | YES  |     | NULL    |       |
+| ProfitPercent | varchar(4)  | YES  |     | NULL    |       |
+| UnitMeasure   | varchar(10) | YES  |     | NULL    |       |
+| QtyOnHand     | int         | YES  |     | NULL    |       |
+| RecorderLvi   | int         | YES  |     | NULL    |       |
+| SellPrice     | int         | YES  |     | NULL    |       |
+| CostPrice     | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+1.c
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| SalesmanNo   | varchar(6)  | YES  |     | NULL    |       |
+| SalesmanName | varchar(20) | YES  |     | NULL    |       |
+| Address1     | varchar(30) | YES  |     | NULL    |       |
+| Address2     | varchar(30) | YES  |     | NULL    |       |
+| City         | varchar(20) | YES  |     | NULL    |       |
+| PinCode      | int         | YES  |     | NULL    |       |
+| State        | varchar(20) | YES  |     | NULL    |       |
+| SalAmt       | int         | YES  |     | NULL    |       |
+| TgttoGet     | int         | YES  |     | NULL    |       |
+| YtdSales     | int         | YES  |     | NULL    |       |
+| Remarks      | varchar(60) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+2.a
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| ClientNo | Name           | Address1 | Address2 | City      | PinCode | Sate        | BalDue |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| C00001   | Ivan Bayross   | Address1 | Address2 | Mumbai    |  400001 | Maharashtra |  15000 |
+| C00002   | Mamta Mazumdar | Address1 | Address2 | Madras    |  780001 | Tamil Nadu  |      0 |
+| C00003   | Chhaya Bankar  | Address1 | Address2 | Mumbai    |  400057 | Maharashtra |   5000 |
+| C00004   | Ashwini Joshi  | Address1 | Address2 | Bangalore |  560001 | Karnataka   |      0 |
+| C00005   | Hansei Colaco  | Address1 | Address2 | Mumbai    |  400060 | Maharashtra |   2000 |
+| C00006   | Deepak Sharma  | Address1 | Address2 | Mangalore |  560050 | Karnataka   |      0 |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+2.b
++-----------+--------------+----------+-------+-----------+------+-----------+-----------+
+| ProductNo | ProductName  | Quantity | Piece | QtyOnHand | Tax  | CostPrice | SellPrice |
++-----------+--------------+----------+-------+-----------+------+-----------+-----------+
+| P0001     | T-shirts     |     5.00 | Piece |       200 |   50 |       350 |       250 |
+| P0345     | Shirts       |     6.00 | Piece |       150 |   50 |       500 |       350 |
+| P06734    | Cotton Jeans |     5.00 | Piece |       100 |   20 |       600 |       450 |
+| P07865    | Jeans        |     5.00 | Piece |       100 |   20 |       750 |       500 |
+| P07868    | Trousers     |     2.00 | Piece |       150 |   50 |       850 |       550 |
+| P07885    | Pull Overs   |     2.50 | Piece |       150 |   50 |       850 |       550 |
+| P07868    | Denim Shirts |     4.00 | Piece |       100 |   40 |       350 |       250 |
+| P07868    | Lycra Tops   |     5.00 | Piece |        70 |   30 |       300 |       175 |
+| P07868    | Skirts       |     5.00 | Piece |        75 |   30 |       450 |       300 |
++-----------+--------------+----------+-------+-----------+------+-----------+-----------+
+2.c
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| SalesmanNo | SalesmanName | Address1 | Address2 | City   | PinCode | State       | SalAmt | TgttoGet | YtdSales | Remarks |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| S00001     | Aman         | A/14     | Worli    | Mumbai |  400002 | Maharashtra |   3000 |      100 |       50 | Good    |
+| S00002     | Omkar        | 65       | Nariman  | Mumbai |  400001 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00003     | Raj          | P-7      | Bandra   | Mumbai |  400032 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00004     | Ashish       | A/7      | Juhu     | Mumbai |  400044 | Maharashtra |   3500 |      200 |      150 | Good    |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+
+3.a
++----------------+
+| Name           |
++----------------+
+| Ivan Bayross   |
+| Mamta Mazumdar |
+| Chhaya Bankar  |
+| Ashwini Joshi  |
+| Hansei Colaco  |
+| Deepak Sharma  |
++----------------+
+3.b
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| ClientNo | Name           | Address1 | Address2 | City      | PinCode | Sate        | BalDue |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| C00001   | Ivan Bayross   | Address1 | Address2 | Mumbai    |  400001 | Maharashtra |  15000 |
+| C00002   | Mamta Mazumdar | Address1 | Address2 | Madras    |  780001 | Tamil Nadu  |      0 |
+| C00003   | Chhaya Bankar  | Address1 | Address2 | Mumbai    |  400057 | Maharashtra |   5000 |
+| C00004   | Ashwini Joshi  | Address1 | Address2 | Bangalore |  560001 | Karnataka   |      0 |
+| C00005   | Hansei Colaco  | Address1 | Address2 | Mumbai    |  400060 | Maharashtra |   2000 |
+| C00006   | Deepak Sharma  | Address1 | Address2 | Mangalore |  560050 | Karnataka   |      0 |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+3.c
++----------------+-----------+-------------+
+| Name           | City      | Sate        |
++----------------+-----------+-------------+
+| Ivan Bayross   | Mumbai    | Maharashtra |
+| Mamta Mazumdar | Madras    | Tamil Nadu  |
+| Chhaya Bankar  | Mumbai    | Maharashtra |
+| Ashwini Joshi  | Bangalore | Karnataka   |
+| Hansei Colaco  | Mumbai    | Maharashtra |
+| Deepak Sharma  | Mangalore | Karnataka   |
++----------------+-----------+-------------+
+3.d
++--------------+
+| ProductName  |
++--------------+
+| T-shirts     |
+| Shirts       |
+| Cotton Jeans |
+| Jeans        |
+| Trousers     |
+| Pull Overs   |
+| Denim Shirts |
+| Lycra Tops   |
+| Skirts       |
++--------------+
+3.e
++---------------+
+| Name          |
++---------------+
+| Ivan Bayross  |
+| Chhaya Bankar |
+| Hansei Colaco |
++---------------+
+3.f
++--------------+
+| SalesmanName |
++--------------+
+| Aman         |
+| Omkar        |
+| Raj          |
++--------------+
+
+4.a
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| ClientNo | Name           | Address1 | Address2 | City      | PinCode | State       | BalDue |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| C00001   | Ivan Bayross   | Address1 | Address2 | Mumbai    |  400001 | Maharashtra |  15000 |
+| C00002   | Mamta Mazumdar | Address1 | Address2 | Madras    |  780001 | Tamil Nadu  |      0 |
+| C00003   | Chhaya Bankar  | Address1 | Address2 | Mumbai    |  400057 | Maharashtra |   5000 |
+| C00004   | Ashwini Joshi  | Address1 | Address2 | Bangalore |  560001 | Karnataka   |      0 |
+| C00005   | Hansei Colaco  | Address1 | Address2 | Bangalore |  400060 | Maharashtra |   2000 |
+| C00006   | Deepak Sharma  | Address1 | Address2 | Mangalore |  560050 | Karnataka   |      0 |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+4.b
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| ClientNo | Name           | Address1 | Address2 | City      | PinCode | State       | BalDue |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+| C00001   | Ivan Bayross   | Address1 | Address2 | Mumbai    |  400001 | Maharashtra |   1000 |
+| C00002   | Mamta Mazumdar | Address1 | Address2 | Madras    |  780001 | Tamil Nadu  |      0 |
+| C00003   | Chhaya Bankar  | Address1 | Address2 | Mumbai    |  400057 | Maharashtra |   5000 |
+| C00004   | Ashwini Joshi  | Address1 | Address2 | Bangalore |  560001 | Karnataka   |      0 |
+| C00005   | Hansei Colaco  | Address1 | Address2 | Bangalore |  400060 | Maharashtra |   2000 |
+| C00006   | Deepak Sharma  | Address1 | Address2 | Mangalore |  560050 | Karnataka   |      0 |
++----------+----------------+----------+----------+-----------+---------+-------------+--------+
+4.c
++-----------+--------------+----------+-------+-----------+------+-----------+-----------+
+| ProductNo | ProductName  | Quantity | Piece | QtyOnHand | Tax  | CostPrice | SellPrice |
++-----------+--------------+----------+-------+-----------+------+-----------+-----------+
+| P0001     | T-shirts     |     5.00 | Piece |       200 |   50 |       350 |       250 |
+| P0345     | Shirts       |     6.00 | Piece |       150 |   50 |       500 |       350 |
+| P06734    | Cotton Jeans |     5.00 | Piece |       100 |   20 |       600 |       450 |
+| P07865    | Jeans        |     5.00 | Piece |       100 |   20 |       750 |       500 |
+| P07868    | Trousers     |     2.00 | Piece |       150 |   50 |       950 |       550 |
+| P07885    | Pull Overs   |     2.50 | Piece |       150 |   50 |       850 |       550 |
+| P07868    | Denim Shirts |     4.00 | Piece |       100 |   40 |       350 |       250 |
+| P07868    | Lycra Tops   |     5.00 | Piece |        70 |   30 |       300 |       175 |
+| P07868    | Skirts       |     5.00 | Piece |        75 |   30 |       450 |       300 |
++-----------+--------------+----------+-------+-----------+------+-----------+-----------+
+4.d
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| SalesmanNo | SalesmanName | Address1 | Address2 | City   | PinCode | State       | SalAmt | TgttoGet | YtdSales | Remarks |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| S00001     | Aman         | A/14     | Worli    | Mumbai |  400002 | Maharashtra |   3000 |      100 |       50 | Good    |
+| S00002     | Omkar        | 65       | Nariman  | Mumbai |  400001 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00003     | Raj          | P-7      | Bandra   | Mumbai |  400032 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00004     | Ashish       | A/7      | Juhu     | Mumbai |  400044 | Maharashtra |   3500 |      200 |      150 | Good    |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
